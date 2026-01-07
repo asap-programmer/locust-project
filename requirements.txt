@@ -1,0 +1,19 @@
+# Locust Load Testing Dependencies
+locust>=2.20.0
+locust-plugins>=4.0.0
+
+# gRPC support
+grpcio>=1.60.0
+grpcio-tools>=1.60.0
+protobuf>=4.25.0
+
+# HTTP client
+requests>=2.31.0
+
+# Utilities
+python-dotenv>=1.0.0
+
+# Data analysis and visualization (optional)
+pandas>=2.0.0
+matplotlib>=3.7.0
+seaborn>=0.12.0

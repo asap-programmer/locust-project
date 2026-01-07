@@ -1,0 +1,114 @@
+syntax = "proto3";
+
+package glossary;
+
+// Сообщение для представления термина
+message Term {
+  int32 id = 1;
+  string keyword = 2;
+  string definition = 3;
+  string category = 4;
+  string created_at = 5;
+  string updated_at = 6;
+}
+
+// Запрос на создание термина
+message CreateTermRequest {
+  string keyword = 1;
+  string definition = 2;
+  string category = 3;
+}
+
+// Ответ с созданным термином
+message CreateTermResponse {
+  Term term = 1;
+  string message = 2;
+}
+
+// Запрос на получение термина по ключевому слову
+message GetTermRequest {
+  string keyword = 1;
+}
+
+// Ответ с термином
+message GetTermResponse {
+  Term term = 1;
+}
+
+// Запрос на получение всех терминов
+message GetAllTermsRequest {
+  int32 skip = 1;
+  int32 limit = 2;
+  string category = 3;
+}
+
+// Ответ со списком терминов
+message GetAllTermsResponse {
+  repeated Term terms = 1;
+  int32 total = 2;
+}
+
+// Запрос на обновление термина
+message UpdateTermRequest {
+  string keyword = 1;
+  string definition = 2;
+  string category = 3;
+}
+
+// Ответ с обновленным термином
+message UpdateTermResponse {
+  Term term = 1;
+  string message = 2;
+}
+
+// Запрос на удаление термина
+message DeleteTermRequest {
+  string keyword = 1;
+}
+
+// Ответ после удаления
+message DeleteTermResponse {
+  string message = 1;
+  string deleted_keyword = 2;
+}
+
+// Запрос списка категорий
+message GetCategoriesRequest {}
+
+// Ответ со списком категорий
+message GetCategoriesResponse {
+  repeated string categories = 1;
+}
+
+// Запрос проверки здоровья сервиса
+message HealthCheckRequest {}
+
+// Ответ проверки здоровья
+message HealthCheckResponse {
+  string status = 1;
+  string service = 2;
+}
+
+// Определение gRPC сервиса глоссария
+service GlossaryService {
+  // Создать новый термин
+  rpc CreateTerm(CreateTermRequest) returns (CreateTermResponse);
+
+  // Получить термин по ключевому слову
+  rpc GetTerm(GetTermRequest) returns (GetTermResponse);
+
+  // Получить все термины
+  rpc GetAllTerms(GetAllTermsRequest) returns (GetAllTermsResponse);
+
+  // Обновить существующий термин
+  rpc UpdateTerm(UpdateTermRequest) returns (UpdateTermResponse);
+
+  // Удалить термин
+  rpc DeleteTerm(DeleteTermRequest) returns (DeleteTermResponse);
+
+  // Получить список категорий
+  rpc GetCategories(GetCategoriesRequest) returns (GetCategoriesResponse);
+
+  // Проверка здоровья сервиса
+  rpc HealthCheck(HealthCheckRequest) returns (HealthCheckResponse);
+}
